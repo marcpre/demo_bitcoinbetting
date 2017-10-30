@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  body
+    .container-fluid
+      .row
+        .col-md-12
+          h3
+            | Mentoring 1
+          a.btn.btn-primary(href='/new', role='button')
+            | Create Post
+          table.table
+            thead.thead-inverse
+              tr
+                th #
+                th Name
+                th Market Cap
+                th Price
+                th Volume (24h)	
+                th Circulating Supply	
+                th Change (24h)	
+                th Price Graph (7d)
+            tbody

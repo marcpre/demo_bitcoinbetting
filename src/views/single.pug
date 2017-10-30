@@ -1,0 +1,180 @@
+extends layout
+
+block content
+  body
+    .container-fluid
+      .row
+        .col-md-12
+          h3
+            | Single Post
+          hr
+            .row
+              .col-md-4
+                h1
+                  img.currency-logo-32x32(src="<?php the_field('logo'); ?>", alt='<?php the_title(); ?>')
+                  |             Logo
+                  small.bold
+                    | BTC
+                | 21.000.000 Coins Issued
+                .control-group
+                  label.control-label Available Coins:
+                  .controls
+                    | 21.000.000 Coins Issued
+                .control-group
+                  label.control-label Hash Algorithm:
+                  .controls
+                    | SHA
+                .control-group
+                  label.control-label Proof:
+                  .controls
+                    | Proof of Stake
+                .control-group
+                  label.control-label Category:
+                  .controls
+                    | Cryptocurrency
+                .control-group
+                  label.control-label Website:
+                  .controls
+                    a(href='www.bitcoin.com')
+                      | www.bitcoin.com
+                .control-group
+                  label.control-label Contact Details:
+                  .controls
+                    a(href='mailto:satoshi@nakomoto.com')
+                      | satoshi@nakomoto.com
+                br
+                br
+                br
+                div
+                  | Official Website:
+                  a(href='www.bitcoin.com')
+                    | www.bitcoin.com
+                div
+                  | Contact Details:
+                  a(href="mailto:<?php get_field('contact_details'); ?>")
+                    i.glyphicons.glyphicons-envelope
+                    span
+              .col-md-8
+                #tabs-90784.tabbable
+                  ul.nav.nav-tabs
+                    li.active
+                      a(href='#panel-charts', data-toggle='tab') Charts
+                    li
+                      a(href='#panel-markets', data-toggle='tab') Markets
+                    li
+                      a(href='#panel-fundamentals', data-toggle='tab') Fundamentals
+                    li
+                      a(href='#panel-social', data-toggle='tab') Social
+                  .tab-content
+                    #panel-charts.tab-pane.active
+                      p
+                        | I'm in Section 1.
+                    #panel-markets.tab-pane
+                      div
+                        h2 Exchanges
+                      hr
+                    #panel-fundamentals.tab-pane
+                      h2 Overview
+                      .control-group
+                        label.control-label ICO
+                        .controls
+                          | Went public on
+                      .control-group
+                        label.control-label Description
+                        .controls
+                          | Went public on
+                      .control-group
+                        label.control-label Headquarter
+                        .controls
+                      .control-group
+                        label.control-label Website
+                        .controls
+                          a(href="<?php the_field('website'); ?>")
+                            img(src="<?php the_field('website_screenshot'); ?>", width='100', height='100')
+                      hr
+                      .control-group
+                        h2 Founders
+                        .controls
+                          table.table.table-hover
+                            thead
+                              tr
+                                th Image
+                                th Name
+                            tbody
+                      hr
+                      .control-group
+                        label.control-label Useful Websites
+                        .controls
+                          a(href='')
+                      hr
+                      .control-group
+                        h2 White Paper(s)
+                        .controls
+                          table.table.table-hover
+                            tr
+                              th File
+                              th Url
+                      hr
+                      .control-group
+                        label.control-label Roadmap
+                        .controls
+                          table
+                            tr
+                              th Event
+                              th Date
+                      hr
+                      .control-group
+                        h2 Explorer(s)
+                        .controls
+                          table.table.table-hover
+                            tr
+                              th Explorer
+                              th Url
+                            tr
+                              td
+                              td(style='display: inline-table;')
+                      hr
+                      .control-group
+                        h2 Roadmap
+                        .controls
+                          table.table.table-hover
+                            tr
+                              th Event
+                              th Date
+                              th Date
+                            tr
+                              td
+                                | Event
+                              td(style='display: inline-table;')
+                                | Date
+                              td(style='display: inline-table;')
+                                | Description
+                      hr
+                    #panel-social.tab-pane
+                      h2 Where to use your coins?
+                      .control-group
+                        .controls
+                          table.table.table-hover
+                            thead
+                              tr
+                                th Titel
+                                th URL
+                            tbody
+                              tr
+                                td
+                                td(style='display: inline-table;')
+                                  a(href="<?php the_sub_field('coins_url'); ?>", target='_blank')
+                      hr
+                      div
+                        h2 Github
+                      div
+                        h2 Reddit Feed
+                        script(src='https://redditjs.com/subreddit.js', data-subreddit='/bitcoin')
+                      hr
+                      div
+                        h2 Twitter Feed
+                      hr
+                      h2 Slack Channels
+
+         
+
