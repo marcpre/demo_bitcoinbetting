@@ -1,15 +1,76 @@
-exports.up = function(knex, Promise) {
-  return knex.schema.createTable('users', (t) => {
-    t.increments('id').unsigned().primary()
-    t.string('username').notNull()
-    t.string('password').notNull()
-    t.boolean('deleted').nullable()
-    t.dateTime('createdAt').notNull()
-    t.dateTime('updatedAt').nullable()
-    t.dateTime('deletedAt').nullable()
+const knex = require('../connection/db')
+const bcrypt = require('bcrypt')
+
+const saltRounds = 10
+
+async function findUserByUserName(username) {
+  const user = await knex('users').where({
+    username,
   })
+  if (!username) {
+    return null
+  }
+  return user
 }
 
-exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('users')
+async function findUserById(id) {
+  const user = await knex('users').where({
+    id,
+  })
+  if (!id) {
+    return null
+  }
+  return user
+}
+
+async function createUser(username, pwd) {
+  // check if username already exists
+  const userExist = await findUserByUserName(username)
+  try {
+    if (userExist) {
+      const salt = await bcrypt.genSalt(saltRounds)
+      const pwdHash = await bcrypt.hash(pwd, salt)
+
+      const user = {
+        username,
+        password: pwdHash,
+        createdAt: new Date(),
+        deleted: false,
+      }
+      console.log(`Create User: ${user.username} ${user.pwdHash} ${user.createdAt} ${user.deleted}`)
+
+      await knex('users').insert(user, 'id')
+    } else {
+      console.log('Username already exists')
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function login(username, plaintTextPassword) {
+  try {
+    const userObj = await knex('users').select().where({
+      username,
+    }).first()
+    if (!userObj) return null
+
+    const resComp = await bcrypt.compare(plaintTextPassword, userObj.password)
+
+    if (resComp) {
+      console.log('login: login')
+      return userObj
+    }
+    console.log('login: cannot login')
+    return false
+  } catch (e) {
+    return console.log(e)
+  }
+}
+
+module.exports = {
+  createUser,
+  findUserByUserName,
+  login,
+  findUserById,
 }
